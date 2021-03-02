@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="PhpIncludePathManager">
-    <include_path>
-      <path value="$PROJECT_DIR$/deeper-learning-starter-ff8e9f7ebb25/vendor/composer" />
-    </include_path>
-  </component>
-</project>
