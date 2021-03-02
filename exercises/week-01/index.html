@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Commerce</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+<main>
+    <div id="main">
+        <img id="mainImage" class="mainImg" src="images/nike.jpeg" alt="nike shoes">
+
+        <div id="carouselImages" class="carousel" data-flickity='{ "wrapAround": true }'>
+            <div class="carousel-cell">
+                <img onclick="changeImg1()" id="cell1" class="carouselImg" src="images/nike.jpeg" alt="nike">
+            </div>
+            <div class="carousel-cell">
+                <img onclick="changeImg2()" id="cell2" class="carouselImg" src="images/nike1.jpeg" alt="nike">
+            </div>
+            <div class="carousel-cell">
+                <img onclick="changeImg3()" id="cell3" class="carouselImg" src="images/nike2.jpeg" alt="nike">
+            </div>
+
+        </div>
+    </div>
+    <div id="description">
+        <h1>Nike Air Max 97</h1>
+        <h2>Description</h2>
+        <p>Nike look to the past to redefine their future - these men's Air Max 97 trainers from Nike are your go-to for statement style. Inspired by the sleek look of high-speed Japanese bullet trains, a full-length Air unit takes the Swoosh's on-point impact protection next level. Arriving in a black colourway, the sneaks feature a leather and textile upper for a premium look with breathable qualities. The lower part of the upper features repeating, tonal Nike wording to add an extra dynamic to the already standout look. With the famed Waffle pattern outsole for grippy traction, the sneaks are finished with the iconic Swoosh to the sides in red.
+            <br>
+            Care & Material
+            Leather & Textile Upper/Synthetic Sole
+            <br>
+            <em>Colour:</em> Black
+            <br>
+            <em>Product Code:</em> 1200161/077390</p>
+        <button class="cart" type="button"><i class="fas fa-shopping-basket"></i> Add to Basket</button>
+        <button class="wishlist" type="button"><i class="fas fa-heart"></i> Add to Wishlist</button>
+        <button class="checkout" type="button"><i class="fas fa-shopping-cart"></i> Checkout</button>
+    </div>
+
+</main>
+
+<script>
+    function changeImg1() {
+        let img1 = document.getElementById('cell1').src;
+        console.log(img1);
+        document.getElementById('mainImage').src = img1;
+    }
+    function changeImg2() {
+        let img2 = document.getElementById('cell2').src;
+        console.log(img2);
+        document.getElementById('mainImage').src = img2;
+    }
+    function changeImg3() {
+        let img3 = document.getElementById('cell3').src;
+        console.log(img3);
+        document.getElementById('mainImage').src = img3;
+    }
+
+
+    // function changeImg(){
+    //     let img1 = document.getElementById('cell1');
+    //     let img2 = document.getElementById('cell2');
+    //     let img3 = document.getElementById('cell3');
+    //
+    //     if(img1){
+    //         document.getElementById('cell1').addEventListener('click', changeImg1());
+    //     }
+    //     else if(img2){
+    //         document.getElementById('cell2').addEventListener('click', changeImg2());
+    //     }
+    //     else{
+    //         document.getElementById('cell3').addEventListener('click', changeImg3());
+    //     }
+    //
+    // }
+
+
+
+
+</script>
+
+</body>
+</html>

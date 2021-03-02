@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Change Background</title>
+</head>
+<body>
+<label>Choose your favourite color</label>
+<input type="color" id="userColor" onchange="changeColor()">
+
+<script>
+    function changeColor() {
+        let chosenColor = document.getElementById('userColor');
+        let color = chosenColor.value;
+        console.log(color);
+        document.body.style.backgroundColor = color;
+    }
+
+</script>
+</body>
+</html>

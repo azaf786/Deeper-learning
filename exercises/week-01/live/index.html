@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Validate form</title>
+
+    <style>
+        .invalid{
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+<h1>Your details</h1>
+<form id="my-form" action="">
+    <div>
+        <label for="your-name">Your name:</label>
+        <input type="text" name="name" id="your-name">
+    </div>
+    <div>
+        <label for="your-age">Your age:</label>
+        <input type="number" name="age" id="your-age">
+    </div>
+    <div>
+        <label for="event-test"> Event:</label>
+        <input type="text" name="some-name" id="event-test">
+    </div>
+    <input type="submit" value="Submit">
+</form>
+
+<script>
+    var form = document.getElementById('my-form');
+    form.addEventListener('submit', validateForm);
+
+    var eventTest = document.getElementById('event-test');
+    eventTest.addEventListener('change', onChange);
+
+    function onChange(){
+        var eventTest = document.getElementById('event-test');
+        console.log(eventTest.value);
+    }
+
+    function validateForm(e) {
+
+        // var isValid = true;
+        var nameInput = document.getElementById('your-name');
+        var ageInput = document.getElementById('your-age');
+
+
+        nameInput.classList.remove('invalid');
+        nameInput.classList.remove('invalid');
+
+        if(nameInput.value.length === 0) {
+            nameInput.classList.add('invalid');
+            // isValid = false;
+            e.preventDefault();
+        }
+
+        if(ageInput.value < 14) {
+            ageInput.classList.add('invalid');
+            // isValid = false;
+            e.preventDefault();
+        }
+
+        // return isValid;
+    }
+</script>
+</body>
+</html>
