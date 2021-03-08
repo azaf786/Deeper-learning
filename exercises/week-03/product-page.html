@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Products</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+</head>
+<body class="p-4">
+
+<div class="container">
+    <div class="card p-4">
+        <div class="row">
+            <div class="col-md-6 col-sm-12 text-center">
+                <img src="images/nike.jpeg" alt="shoes" class="img-fluid">
+                <div class="row py-2">
+                    <div class="col-4"><img src="images/nike.jpeg" width="150" height="100" alt="shoes"
+                                            class="img-fluid"></div>
+                    <div class="col-4"><img src="images/nike1.jpeg" width="150" height="100" alt="shoes"
+                                            class="img-fluid"></div>
+                    <div class="col-4"><img src="images/nike2.jpeg" width="150" height="100" alt="shoes"
+                                            class="img-fluid"></div>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h1>Lorem ipsum dolor sit amet</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad asperiores dolorum eius expedita
+                    fugiat illo inventore iure labore odit perferendis quae quaerat quasi quidem, repellendus! Cumque
+                    enim molestiae mollitia?
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad asperiores dolorum eius expedita
+                    fugiat illo inventore iure labore odit perferendis quae quaerat quasi quidem, repellendus! Cumque
+                    enim molestiae mollitia?
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad asperiores dolorum eius expedita
+                    fugiat illo inventore iure labore odit perferendis quae quaerat quasi quidem, repellendus! Cumque
+                    enim molestiae mollitia?
+                </p>
+                <button type="submit" class="btn btn-primary">Add to basket</button>
+            </div>
+        </div>
+
+        <div class="card p-2 m-2">
+            <h2 class="m-2">Additional Information</h2>
+            <table class="table badge-danger table-bordered p-2 rounded">
+                <tbody>
+                <tr>
+                    <th>Average Rating</th>
+                    <td><img src="images/stars.png" class="img-fluid" width="80px" height="50px" alt="product rating"></td>
+                </tr>
+                <tr>
+                    <th>Another Stat</th>
+                    <td>90/100</td>
+                </tr>
+                <tr>
+                    <th>Yea just another Stat</th>
+                    <td>something something</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card p-2 m-2">
+            <h2 class="m-2">Recent Checkins</h2>
+            <div id="checkins">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+<!--Axios-->
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    axios.get('http://localhost:8080/checkins')
+    .then(function (response) {
+        console.log(response.data);
+
+        if(response.data.length === 0){
+            $('<div>').text('No checkins found').css({'color': 'red', 'padding-left': '8px'}).appendTo('#checkins');
+            return;
+        }
+
+        for(var i=0; i < response.data.length; i++){
+            var checkinEl = $('<div>').addClass('card p-4 my-4');
+
+            var h3 = $('<h3>').text(response.data[i].name).appendTo(checkinEl);
+            var starRating = $('<div>').addClass('star-rating');
+
+            var checkinRating = response.data[i].rating * 20;
+            $('<div>').css('width', checkinRating + '%').appendTo(starRating);
+            starRating.appendTo(h3);
+            $('<p>').text(response.data[i].review).appendTo(checkinEl);
+
+            $('#checkins').append(checkinEl);
+
+            function checkRating(x){
+                console.log(x);
+                var h4 = $('<p>').appendTo(checkinEl);
+                for(var i=0; i <=x; i++){
+                     i = i + 20;
+                    console.log('I am i' +i);
+
+                    h4 = $('<i>').addClass('fas fa-star').appendTo(h4);
+                    console.log(h4);
+                }
+
+            }
+
+            checkRating(checkinRating);
+
+            function formatDate(date) {
+                var hours = date.getHours();
+                var minutes = date.getMinutes();
+                var ampm = hours >= 12 ? 'pm' : 'am';
+                hours = hours % 12;
+                hours = hours ? hours : 12; // the hour '0' should be '12'
+                minutes = minutes < 10 ? '0'+minutes : minutes;
+                var strTime = hours + ':' + minutes + ' ' + ampm;
+                return (date.getMonth()+1) + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+            }
+
+            var date = new Date(response.data[i].dateTime);
+            var formattedDate = formatDate(date);
+            $('<p>').text(formattedDate).appendTo(checkinEl);
+
+            $('#checkins').append(checkinEl);
+
+        }
+    })
+    .catch(function(error){
+        console.log('AXIOS ERROR'+ error);
+    })
+</script>
+
+</body>
+</html>
