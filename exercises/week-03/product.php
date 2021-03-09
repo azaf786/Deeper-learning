@@ -10,6 +10,7 @@ if(!empty($_POST)){
     $serializedProduct = serialize($product);
     file_put_contents('products.txt', $serializedProduct);
 
+
     $message = 'Product created. <br>';
     
     $productFromFile = file_get_contents('products.txt');
