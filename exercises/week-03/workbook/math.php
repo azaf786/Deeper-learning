@@ -8,9 +8,6 @@ if (empty(isset($_POST))) {
 }
 if (!empty($_POST)) {
 
-
-
-
     $result = 0;
     $operation = $_POST['operation'];
     $a = $_POST['a'];
@@ -29,17 +26,27 @@ if (!empty($_POST)) {
 
     class userCalculationData
     {
-        public $a,$b,$operation;
+        public $a,$b,$operation,$result;
     }
 
     $inputData = new UserCalculationData();
     $inputData->a = $_POST['a'];
     $inputData->b = $_POST['b'];
     $inputData->operation = $_POST['operation'];
+    $inputData->result = $result;
 
     $serializeInputData = serialize($inputData);
-    file_put_contents(time().'.txt', $serializeInputData);
-    $message = '<div class="alert alert-light">File created </div>';
+    $createFile = file_put_contents(time().'.txt', $serializeInputData);
+
+
+    $fileData = file_get_contents('1615338609.txt');
+    $unserializedInputData = unserialize($fileData);
+
+    $a .= $unserializedInputData->a;
+    $b .= $unserializedInputData->b;
+    $operation .= $unserializedInputData->operation;
+    $result .= $unserializedInputData->result;
+
 
     die();
 }
@@ -62,6 +69,11 @@ if (!empty($_POST)) {
         .result {
             background-color: #88CC88;
         }
+
+        tr {
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
@@ -69,6 +81,54 @@ if (!empty($_POST)) {
 <div id="alert">
 
 </div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Previous submissions</h5>
+
+            </div>
+            <div class="modal-body">
+                <p>Click on the rows below to populate table with that data.</p>
+                <p id="helpMessage"  style="display: none;" >Table Populated!</p>
+                <table id="previousSubmissions" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">a</th>
+                        <th scope="col">b</th>
+                        <th scope="col">operation</th>
+                        <th scope="col">result</th>
+                    </tr>
+                    </thead>
+                    <tbody onclick="showMessage()">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>233</td>
+                        <td>3232</td>
+                        <td>multiplication</td>
+                        <td>753056</td>
+                    </tr>
+
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>123</td>
+                        <td>123</td>
+                        <td>addition</td>
+                        <td>246</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button"  class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <form id="formCalculate" name="formCalculate" action="" method="post" class="form-group bg-light p-3 my-2">
     <div class="form-group">
         <label for="a">First number</label>
@@ -94,6 +154,10 @@ if (!empty($_POST)) {
     </div>
     <br>
     <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal">
+        Previous submission
+    </button>
+
 </form>
 
 <div class="form-group rounded p-3 result">
@@ -117,6 +181,24 @@ if (!empty($_POST)) {
 <!--Axios-->
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 <script>
+
+    function showMessage(){
+        document.getElementById('helpMessage').style.display = 'block';
+        setTimeout(function(){document.getElementById('helpMessage').style.display = 'none'; }, 1000);
+    }
+
+    $('#previousSubmissions tr').click(function (e) {
+        console.log(e.target)
+
+        $(this).children("td").each(function (index) {
+            if (index === 0) $('#a').val(this.innerText);
+            if (index === 1) $('#b').val(this.innerText);
+            if (index === 2) $('#operation').val(this.innerText);
+        })
+
+    })
+
+
     document.querySelector('#formCalculate').addEventListener('submit', calculate)
 
     function calculate(e) {
@@ -140,9 +222,13 @@ if (!empty($_POST)) {
                 console.log(response.data);
                 document.getElementById('result').value = response.data;
 
+
                 $('<div>').addClass('alert alert-light').text('File created successfully').appendTo('#alert');
+                setTimeout(function(){document.getElementById('alert').style.display = 'none'; }, 2000);
+
+
                 if (response.data.length === 0) {
-                    return;
+                    $('<div>').addClass('alert alert-danger').text('An error occured. Check axios response.').appendTo('#alert');
                 }
             })
             .catch(function (error) {
