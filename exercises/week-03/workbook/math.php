@@ -126,6 +126,8 @@ if (!empty($_POST)) {
 
 <form id="formCalculate" name="formCalculate" action="" method="post" class="form-group bg-light p-3 my-2">
     <div class="form-group">
+
+        <img src="https://res.cloudinary.com/pricecheck/image/upload/c_pad,h_250,d_noimg.jpg/ALDPBAC002-1" alt="">
         <label for="a">First number</label>
         <input type="number" class="form-control" name="a" id="a" aria-describedby="firstNumber"
                placeholder="Enter a number">
