@@ -2,6 +2,11 @@
 
 $message = '';
 
+class userCalculationData
+{
+    public $a,$b,$operation,$result;
+}
+
 if (empty(isset($_POST))) {
     echo "Field empty";
     die();
@@ -24,10 +29,6 @@ if (!empty($_POST)) {
     }
     echo $result;
 
-    class userCalculationData
-    {
-        public $a,$b,$operation,$result;
-    }
 
     $inputData = new UserCalculationData();
     $inputData->a = $_POST['a'];
@@ -38,18 +39,9 @@ if (!empty($_POST)) {
     $serializeInputData = serialize($inputData);
     $createFile = file_put_contents(time().'.txt', $serializeInputData);
 
-
-    $fileData = file_get_contents('1615338609.txt');
-    $unserializedInputData = unserialize($fileData);
-
-    $a .= $unserializedInputData->a;
-    $b .= $unserializedInputData->b;
-    $operation .= $unserializedInputData->operation;
-    $result .= $unserializedInputData->result;
-
-
     die();
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -103,21 +95,24 @@ if (!empty($_POST)) {
                     </tr>
                     </thead>
                     <tbody onclick="showMessage()">
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>233</td>
-                        <td>3232</td>
-                        <td>multiplication</td>
-                        <td>753056</td>
-                    </tr>
+                    <?php
+                    foreach (glob("*.txt") as $filename) {
 
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>123</td>
-                        <td>123</td>
-                        <td>addition</td>
-                        <td>246</td>
-                    </tr>
+                        $fileData = file_get_contents($filename);
+                        $unserializedInputData = unserialize($fileData);
+                        ?>
+
+                        <tr>
+                            <th scope="row"><?= $filename ?></th>
+                            <td><?= $unserializedInputData->a ?></td>
+                            <td><?= $unserializedInputData->b ?></td>
+                            <td><?= $unserializedInputData->operation ?></td>
+                            <td><?= $unserializedInputData->result ?></td>
+                        </tr>
+
+                    <?php  } ?>
+
+
 
                     </tbody>
                 </table>
@@ -221,7 +216,6 @@ if (!empty($_POST)) {
             .then(function (response) {
                 console.log(response.data);
                 document.getElementById('result').value = response.data;
-
 
                 $('<div>').addClass('alert alert-light').text('File created successfully').appendTo('#alert');
                 setTimeout(function(){document.getElementById('alert').style.display = 'none'; }, 2000);
