@@ -1,5 +1,6 @@
 {
-    "name": "abdullahzafar/testdemo",
+    "name": "abdullahzafar/lecture",
+    "description": "week 4 framework installation",
     "type": "project",
     "authors": [
         {
@@ -9,7 +10,10 @@
     ],
     "require": {
         "filp/whoops": "^2.10",
-        "symfony/var-dumper": "^5.2"
+        "vlucas/phpdotenv": "^5.3",
+        "monolog/monolog": "^2.2",
+        "guzzlehttp/guzzle": "^7.2",
+        "nesbot/carbon": "^2.46"
     },
     "require-dev": {
         "roave/security-advisories": "dev-master"

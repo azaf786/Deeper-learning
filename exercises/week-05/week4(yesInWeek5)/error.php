@@ -2,5 +2,5 @@
 
 require_once 'setup.php';
 
-$a = $v;
+$a = $b;
 echo $a;

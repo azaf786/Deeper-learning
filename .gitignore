@@ -149,3 +149,4 @@ tags
 # Persistent undo
 [._]*.un~
 
+/exercises/week-04/lecture/.env
