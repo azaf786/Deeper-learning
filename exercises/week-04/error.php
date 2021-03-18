@@ -1,7 +1,7 @@
 <?php
 
-require_once 'setup.php';
+require_once 'vendor/setup.php';
 
-$a = ;
+$a = $f;
 
 echo $a;

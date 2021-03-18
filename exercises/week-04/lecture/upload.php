@@ -18,9 +18,9 @@ if (!empty($_FILES)) {
             echo "File could not be uploaded";
         }
 
-        $targetPath = '../uploads/'.time() . '_' . $file['name'];
-        if(!move_uploaded_file($file['tmp_name'],$targetPath)){
-            echo "Not uploaded because of error #".$_FILES["profilePic"]["error"];
+        $targetPath = '../uploads/' . time() . '_' . $file['name'];
+        if (!move_uploaded_file($file['tmp_name'], $targetPath)) {
+            echo "Not uploaded because of error #" . $_FILES["profilePic"]["error"];
         }
     }
 }

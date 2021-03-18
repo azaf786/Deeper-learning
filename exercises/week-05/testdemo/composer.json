@@ -1,5 +1,5 @@
 {
-    "name": "abdullahzafar/week-04",
+    "name": "abdullahzafar/testdemo",
     "type": "project",
     "authors": [
         {
@@ -7,11 +7,11 @@
             "email": "abdullahzafar70@gmail.com"
         }
     ],
+    "require": {
+        "filp/whoops": "^2.10",
+        "symfony/var-dumper": "^5.2"
+    },
     "require-dev": {
         "roave/security-advisories": "dev-master"
-    },
-    "require": {
-        "filp/whoops": "^2.9",
-        "symfony/var-dumper": "^5.2"
     }
 }
