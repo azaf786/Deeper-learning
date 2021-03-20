@@ -1,0 +1,1 @@
+O:18:"App\Entity\CheckIn":5:{s:4:"name";s:14:"Abdullah Zafar";s:3:"dob";s:10:"1999-07-26";s:5:"email";s:25:"abdullahzafar70@gmail.com";s:10:"profilePic";s:7:"$_7.png";s:10:"timeposted";s:19:"2021-03-20 22:34:44";}

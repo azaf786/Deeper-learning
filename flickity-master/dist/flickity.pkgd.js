@@ -724,7 +724,7 @@ utils.toDashed = function( str ) {
 
 var console = window.console;
 /**
- * allow user to initialize classes via [data-namespace] or .js-namespace class
+ * allow user to initialize Entity via [data-namespace] or .js-namespace class
  * htmlInit( Widget, 'widgetName' )
  * options are parsed from data-namespace-options
  */

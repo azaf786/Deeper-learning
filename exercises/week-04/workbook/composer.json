@@ -1,6 +1,6 @@
 {
-    "name": "abdullahzafar/project",
-    "description": "DEEPer project",
+    "name": "abdullahzafar/workbook",
+    "description": "workbook week 4",
     "type": "project",
     "authors": [
         {
@@ -17,8 +17,9 @@
         }
     },
     "require": {
-        "filp/whoops": "^2.9",
+        "filp/whoops": "^2.11",
         "vlucas/phpdotenv": "^5.3",
-        "monolog/monolog": "^2.2"
+        "monolog/monolog": "^2.2",
+        "nesbot/carbon": "^2.46"
     }
 }
