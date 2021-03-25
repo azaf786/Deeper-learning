@@ -1,6 +1,10 @@
 <?php
 
-require_once '../vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
+use App\DataProvider\DatabaseProvider;
+use App\DataProvider\DatabaseProvider\DataProvider;
+
+
 
 //Whoops
 $whoops = new \Whoops\Run();
@@ -8,7 +12,7 @@ $whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler());
 $whoops->register();
 
 //Dotenv
-$dotenv = \Dotenv\Dotenv::createImmutable(__DIR__ );
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ );
 $dotenv->load();
 
 //Logger
@@ -20,23 +24,5 @@ $logger->pushHandler(
     )
 );
 
-//Pimple
-//$compiler = new Container();
+$dbProvider = new \App\DataProvider\DatabaseProvider2();
 
-
-//DatABase Connection
-
-$username = $_ENV['DB_USERNAME'];
-$password = $_ENV['DB_PASSWORD'];
-
-try {
-    $dbh = new PDO('mysql:dbname=project;host=mysql',
-        $username,
-        $password
-    );
-    $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-
-catch (PDOException $e){
-    die('Error connecting to database: '.$e);
-}
