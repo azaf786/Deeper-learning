@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+body{
+    font-family: 'Roboto', sans-serif;
+}
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+i {
+    margin-right: 10px;
+}
+
+
+.navbar-brand{
+    font-family: 'Lobster', cursive;
+    font-size: 1.6em;
+    text-decoration: none;
+}
+
+
+img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.carousel-cell{
+    border: 0px solid #000000;
+    width: 500px;
+    height: 500px;
+}
+
+#prodImgs{
+    border-radius: 24px 0px 24px 0px;
+    -moz-border-radius: 24px 0px 24px 0px;
+    -webkit-border-radius: 24px 0px 24px 0px;
+}
+
+.card{
+    display: inline-block;
+}
+.profile-card-5{
+    margin-top:20px;
+}
+.profile-card-5 .btn{
+    border-radius:2px;
+    text-transform:uppercase;
+    font-size:12px;
+    padding:7px 20px;
+}
+.profile-card-5 .card-img-block {
+    width: 91%;
+    margin: 0 auto;
+    position: relative;
+    top: -20px;
+
+}
+.profile-card-5 .card-img-block img{
+    -webkit-box-shadow: 0px 0px 17px 3px rgba(0,0,0,0.28);
+    box-shadow: 0px 0px 17px 3px rgba(0,0,0,0.28);
+}
+
+#price-btn{
+    background-color: #194b43;
+    color: #fff;
+    padding: 10px 50px;
+}
+#price-btn:hover{
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)  ;
+    -webkit-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.3)  ;
+    -moz-box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2)  ;
+}
+.profile-card-5 h5{
+    color: #2a2a2a;
+    font-weight:600;
+}
+.profile-card-5 p{
+    font-size:14px;
+    font-weight:300;
+}
+
+a:hover{
+    text-decoration:none;
+}
+.section-padding {
+    padding: 60px 0;
+}
+
+.bottom .copyright {
+    color: #e5e5e5;
+    font-weight: 600;
+}
+
+
+#logo{
+    color: #194b43;
+}
+.copyright a {
+    color: #194b43;
+    margin-left: 3px;
+    padding-right: 3px;
+}
+.bottom p {
+    margin-bottom: 0;
+    line-height: 50px;
+    font-size: 16px;
+    font-weight: 400;
+}
+.copyright p span {
+    color: #d1caca;
+}
+.bottom .copyright p, .bottom .copyright a:hover{
+    color: #6c6d83;
+}
+
+#topPageBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    z-index: 99;
+    font-size: 18px;
+    border: none;
+    outline: none;
+    background-color: #194b43;
+    color: white;
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 4px;
+}
+
+#topPageBtn:hover {
+    background-color: #555;
+}

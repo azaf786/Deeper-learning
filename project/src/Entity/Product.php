@@ -5,6 +5,7 @@ Namespace App\Entity;
 
 class Product
 {
+
     public int $id;
     public string $title;
     public float $averageRating;

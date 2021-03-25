@@ -6,17 +6,57 @@ namespace App\Hydrator;
 
 use App\Entity\CheckIn;
 use App\Entity\Product;
+use App\Entity\Category;
+use App\Entity\Products;
 
 class EntityHydrator
 {
-    public function hydrateProduct(): Product
+    public function hydrateProduct(array $data): Product
     {
-        // ...
+        $product = new Product();
+        $product->id = $data['id'];
+        $product->title = $data['title'];
+        $product->description = $data['description'];
+        $product->imagePath = $data['image_path'];
+        $product->average_rating = $data['average_rating'];
+
+        return $product;
+    }
+
+    public function hydrateProducts(array $data): Products
+    {
+        $products = new Products();
+        $products->id = $data['id'];
+        $products->title = $data['title'];
+        $products->description = $data['description'] ?? null;
+        $products->price = $data['price'];
+
+        return $products;
     }
 
     public function hydrateCheckIn(): CheckIn
     {
-        // ...
+        $checkIn = new CheckIn();
+        $checkIn->id = $data['id'] ?? null;
+        $checkIn->name = $data['name'];
+        $checkIn->rating = $data['rating'];
+        $checkIn->review = $data['review'];
+        $checkIn->productId = $data['product_id'];
+
+        return $checkIn;
+    }
+
+
+    public function hydrateCategory(array $data): Category
+    {
+            $category = new Category();
+            $category->catId = $data['catId'] ?? null;
+            $category->catTitle = $data['catTitle'];
+            $category->parent_id = $data['parent_id'] ?? null;
+//            $category->addCategory($category);
+//            var_dump($category);
+            return $category;
+
     }
 
     public function hydrateProductWithCheckIns(array $data): Product
