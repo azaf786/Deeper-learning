@@ -35,7 +35,8 @@ class DatabaseProvider
         }
     }
 
-    public function getProduct(int $productId): array
+
+    public function getProduct(int $productId): ?Products
     {
         $stmt = $this->dbh->prepare(
             'SELECT * FROM product WHERE id = :id'
@@ -44,19 +45,82 @@ class DatabaseProvider
             'id' => $productId
         ]);
 
-        $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        if(empty($result)){
+            return null;
+        }
 
         $hydrator = new EntityHydrator();
-//        $productsArray = [];
-        $productsArray[] = $allProducts;
-        return $hydrator->hydrateProducts($productsArray);
+        return $hydrator->hydrateProduct($result);
+    }
 
-//        foreach ($allProducts as $row) {
-//            $products = $hydrator->hydrateProducts($row);
-//            $productsArray[] = $products;
+    public function getSearchedProducts(string $searchTerm): array
+    {
+        $stmt = $this->dbh->prepare('SELECT * FROM product WHERE title LIKE :searchTerm');
+        $stmt->execute([
+            'searchTerm' => '%' . $searchTerm . '%'
+        ]);
+
+        return $stmt->fetchAll(PDO::FETCH_CLASS, Products::class);
+    }
+
+//    public function searchProduct(string $searchTerm)
+//    {
+//        $stmt = $this->dbh->prepare(
+//            'SELECT * FROM product WHERE title LIKE :searchTerm ORDER BY title ASC'
+//        );
+//        $stmt->execute([
+//            'searchTerm' => '%' . $searchTerm . '%'
+//        ]);
+//
+//        $suggestions = [];
+//
+//        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//        foreach($result as $row){
+//
+//            $title = $row['title'];
+//            $suggestions[] = $title;
+//
 //        }
+//
+//        $jsonData = json_encode($suggestions);
+//        var_dump($jsonData);
+//
+//        return $jsonData;
 
-//        return $productsArray;
+//        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+//        if(empty($result)){
+//            return null;
+//        }
+//
+//        $hydrator = new EntityHydrator();
+//        return $hydrator->hydrateProduct($result);
+//    }
+
+
+    public function getRecommendedProducts(int $productId): array
+    {
+        $stmt = $this->dbh->prepare(
+            'SELECT * FROM product WHERE id NOT LIKE :id
+                        ORDER BY RAND()
+                        LIMIT 3
+        ');
+        $stmt->execute([
+            'id' => $productId
+        ]);
+
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $hydrator = new EntityHydrator();
+        $recommended = [];
+
+        foreach ($result as $row) {
+            $products = $hydrator->hydrateProducts($row);
+            $recommended[] = $products;
+        }
+
+        return $recommended;
     }
 
     public function getProducts(): array
@@ -64,7 +128,50 @@ class DatabaseProvider
         $stmt = $this->dbh->prepare(
             'SELECT * FROM product 
                         ORDER BY RAND()
-                        LIMIT 12
+                        LIMIT 9
+        ');
+        $stmt->execute([]);
+
+        $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $hydrator = new EntityHydrator();
+        $productsArray = [];
+
+        foreach ($allProducts as $row) {
+            $products = $hydrator->hydrateProducts($row);
+            $productsArray[] = $products;
+        }
+
+        return $productsArray;
+    }
+
+    public function getRecentlyAdded(): array
+    {
+        $stmt = $this->dbh->prepare(
+            'SELECT * FROM product 
+                        ORDER BY id DESC
+        ');
+        $stmt->execute([]);
+
+        $allProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $hydrator = new EntityHydrator();
+        $productsArray = [];
+
+        foreach ($allProducts as $row) {
+            $products = $hydrator->hydrateProducts($row);
+            $productsArray[] = $products;
+        }
+
+        return $productsArray;
+    }
+
+
+    public function getAllProducts(): array
+    {
+        $stmt = $this->dbh->prepare(
+            'SELECT * FROM product 
+                        ORDER BY id ASC
         ');
         $stmt->execute([]);
 
@@ -83,7 +190,7 @@ class DatabaseProvider
 
 
 
-    public function createProduct(Products $product): array
+    public function createProduct(Products $product): Products
     {
         $stmt = $this->dbh->prepare(
             'INSERT INTO product (title, description, price, filePath)

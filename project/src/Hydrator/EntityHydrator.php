@@ -12,22 +12,22 @@ use App\Entity\User;
 
 class EntityHydrator
 {
-    public function hydrateProduct(array $data): Product
+    public function hydrateProduct(array $data): ?Products
     {
-        $product = new Product();
-        $product->id = $data['id'];
-        $product->title = $data['title'];
-        $product->description = $data['description'];
-        $product->imagePath = $data['image_path'];
-        $product->average_rating = $data['average_rating'];
+        $productClass = new Products();
+        $productClass->id = $data['id'] ?? null;
+        $productClass->title = $data['title'];
+        $productClass->description = $data['description'];
+        $productClass->price = $data['price'];
+        $productClass->filePath = $data['filePath'];
 
-        return $product;
+        return $productClass;
     }
 
-    public function hydrateProducts(array $data): Products
+    public function hydrateProducts(array $data): ?Products
     {
         $products = new Products();
-        $products->id = $data['id'];
+        $products->id = $data['id'] ?? null;
         $products->title = $data['title'];
         $products->description = $data['description'];
         $products->price = $data['price'];
@@ -36,17 +36,17 @@ class EntityHydrator
         return $products;
     }
 
-    public function hydrateCheckIn(): CheckIn
-    {
-        $checkIn = new CheckIn();
-        $checkIn->id = $data['id'] ?? null;
-        $checkIn->name = $data['name'];
-        $checkIn->rating = $data['rating'];
-        $checkIn->review = $data['review'];
-        $checkIn->productId = $data['product_id'];
-
-        return $checkIn;
-    }
+//    public function hydrateCheckIn(): CheckIn
+//    {
+//        $checkIn = new CheckIn();
+//        $checkIn->id = $data['id'] ?? null;
+//        $checkIn->name = $data['name'];
+//        $checkIn->rating = $data['rating'];
+//        $checkIn->review = $data['review'];
+//        $checkIn->productId = $data['product_id'];
+//
+//        return $checkIn;
+//    }
 
 
     public function hydrateCategory(array $data): Category
@@ -55,8 +55,6 @@ class EntityHydrator
         $category->catId = $data['catId'] ?? null;
         $category->catTitle = $data['catTitle'];
         $category->parent_id = $data['parent_id'] ?? null;
-//            $category->addCategory($category);
-//            var_dump($category);
         return $category;
 
     }

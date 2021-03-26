@@ -65,7 +65,7 @@ catch (PDOException $e) {
                         <img id="prodImgs" class="card-img-top" src="<?= $prod->filePath ?>" alt="Product images">
                     </div>
                     <div class="card-body pt-0">
-                        <h5 class="card-title"><?= $prod->title ?></h5>
+                        <h5 class="card-title"><a href="viewProduct.php?productId=<?=$prod->id?>"><?= $prod->title ?></a></h5>
                         <?php
                             $trimDescription = strip_tags($prod->description);
                             if(strlen($trimDescription) > 200){
@@ -79,7 +79,7 @@ catch (PDOException $e) {
                         ?>
                         <p class="card-text"><?php echo $trimmedDescription; } ?></p>
                         <div class="text-center">
-                            <a href="#" id="price-btn" class="btn btn-lg text-center">£ <?= $prod->price ?></a>
+                            <a href="viewProduct.php?productId=<?=$prod->id?>" id="price-btn" class="btn btn-lg text-center">£ <?= $prod->price ?></a>
                         </div>
 
                     </div>

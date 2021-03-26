@@ -33,6 +33,8 @@ if(!empty($_POST)){
             $formProduct->price = $formData['price'];
             $formProduct->filePath = $formData['filePath'];
 
+            $getProducts = $dbProvider->createProduct($formProduct);
+
             $productInserted = true;
 
 
@@ -95,7 +97,7 @@ if(!empty($_POST)){
             </div>
 
             <br>
-            <button type="submit" class="btn btn-info">Register</button>
+            <button type="submit" class="btn btn-info">Insert product</button>
         </form>
 
     </div>
