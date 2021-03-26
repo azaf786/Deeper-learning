@@ -4,21 +4,44 @@ use App\Entity\Products;
 
 require_once '../src/setup.php';
 
-
+$productInserted = false;
 if(!empty($_POST)){
+    $filename = $_FILES['filePath']['name'];
+    $destination = 'uploads/' . $filename;
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-    $formData = [
-            'title' => strip_tags($_POST['title']),
-            'description' => strip_tags($_POST['description']),
-            'price' => strip_tags($_POST['price']),
-    ];
+    $file = $_FILES['filePath']['tmp_name'];
+    $size = $_FILES['filePath']['size'];
 
-    $formProduct = new Products;
-    $formProduct->title = $formData['title'];
-    $formProduct->description = $formData['description'];
-    $formProduct->price = $formData['price'];
+    if (in_array($extension, ['zip', 'pdf', 'docx', 'gif'])) {
+        echo "You file extension must be .png, .jpeg or .jpg";
+    } elseif ($_FILES['filePath']['size'] > 1000000) {
+        echo "File too large!";
+    } else {
+        if (move_uploaded_file($file, $destination)) {
 
-    $createProduct = $dbProvider->createProduct($formProduct);
+            $formData = [
+                'title' => strip_tags($_POST['title']),
+                'description' => strip_tags($_POST['description']),
+                'price' => strip_tags($_POST['price']),
+                'filePath' => $destination
+            ];
+
+            $formProduct = new Products();
+            $formProduct->title = $formData['title'];
+            $formProduct->description = $formData['description'];
+            $formProduct->price = $formData['price'];
+            $formProduct->filePath = $formData['filePath'];
+
+            $productInserted = true;
+
+
+
+        } else {
+            echo "Failed to upload file.";
+        }
+    }
+
 }
 
 
@@ -31,13 +54,22 @@ if(!empty($_POST)){
     <title>Create Product</title>
 </head>
 <body>
-<?php include'template/navbar_includes.php'?>
-
+<?php
+    include'template/navbar_includes.php';
+?>
+<?php if($productInserted): ?>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    <strong>Congratulations!</strong> Your product was inserted successfully.
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<?php endif; ?>
 <div class="container m-4 d-flex flex-column mx-auto">
 
     <div class="card p-4">
         <h1 id="createProduct" class="text-center">Create Product</h1>
-        <form action="" method="post" class="form-group bg-light p-4 my-2 rounded">
+        <form action="" method="post" class="form-group bg-light p-4 my-2 rounded" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" name="title" id="title" aria-describedby="title"
@@ -52,9 +84,14 @@ if(!empty($_POST)){
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="number"  class="form-control" name="price" id="price" aria-describedby="price"
+                <input type="number" step="0.01" class="form-control" name="price" id="price" aria-describedby="price"
                        placeholder="Enter a price." required>
                 <small class="form-text text-muted">Charge as little as 0.99p or £999.99</small>
+            </div>
+            <div class="form-group">
+                <label class="form-label" for="filePath">Upload a picture</label>
+                <input type="file" class="form-control" name="filePath" id="filePath" />
+                <small class="form-text text-muted">Supported formats (.png .jpeg .jpg)</small>
             </div>
 
             <br>

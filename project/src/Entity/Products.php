@@ -7,18 +7,9 @@ namespace App\Entity;
 class Products
 {
     public ?int $id;
-    public string $title;
+    public ?string $title;
     public ?string $description;
-    public float $price;
+    public ?float $price;
+    public ?string $filePath;
 
-    public function addProducts(Products $products): void {
-        $this->products[] = $products;
-    }
-
-
-    public function getProducts() : array
-    {
-        return $this->products;
-
-    }
 }

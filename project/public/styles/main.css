@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital@1&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 html, body {
     max-width: 100%;
@@ -27,7 +30,7 @@ i {
 }
 
 
-img{
+#carouselImg{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -162,6 +165,7 @@ a:hover{
     cursor: pointer;
 }
 
+
 .card-1{
     background-image: url(https://ionicframework.com/img/getting-started/ionic-native-card.png);
     background-repeat: no-repeat;
@@ -198,6 +202,22 @@ a:hover{
     margin-bottom: 10px;
     background-color: #f8f9fa;
     border-radius: 5px;
-    color: #2a2a2a;
-;
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    color: #194b43;
+}
+
+h5.card-text{
+    font-family: 'Lobster', cursive;
+}
+
+p.card-text {
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.alert{
+    padding: 20px;
+    margin: 20px auto;
+    width: 90%;
+    font-family: 'Roboto', sans-serif;
 }

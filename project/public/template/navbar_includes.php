@@ -13,13 +13,28 @@
                 <a class="nav-link" href="#"><i class="fas fa-shoe-prints"></i>All Products</a>
             </li>
         </ul>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li>
-                <a class="nav-link" href="../public/login.php"><i class="fas fa-sign-in-alt"></i>Login</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="../public/register.php">Register</a>
-            </li>
+        <ul class="navbar-nav  mt-2 mt-lg-0">
+
+            <?php if(!empty($loggedInUser)): ?>
+                <div class="dropdown show mr-5">
+                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hello (<?= $loggedInUser->username ?>)
+                    </a>
+
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="../public/createProduct.php">Create Product</a>
+                    </div>
+                </div>
+
+            <?php else: ?>
+                <li>
+                    <a class="nav-link" href="../public/login.php"><i class="fas fa-sign-in-alt"></i>Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../public/register.php">Register</a>
+                </li>
+            <?php endif; ?>
+
         </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">

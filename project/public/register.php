@@ -1,3 +1,30 @@
+
+<?php
+
+use App\Hydrator\EntityHydrator;
+use User\User;
+
+require_once '../src/setup.php';
+
+$register = false;
+if(isset($_POST['username'], $_POST['email'], $_POST['password'], $_POST['confirmPass'])){
+    if ($_POST['password'] === $_POST['confirmPass']){
+        $formUser = [
+            'username' => strip_tags($_POST['username']),
+            'email' => filter_var($_POST['email']), FILTER_SANITIZE_EMAIL,
+            'password' => password_hash($_POST['password'], PASSWORD_DEFAULT)
+        ];
+
+        $hydrator = new EntityHydrator();
+        $formUser = $hydrator->hydrateUser($formUser);
+
+        $user = $dbProvider->createUser($formUser);
+        $register = true;
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +34,18 @@
 <body>
 <?php include'template/navbar_includes.php'?>
 
+<?php if($register): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Account Created Successfully!</strong><a href="login.php"> Login here.</a>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+<?php endif; ?>
+
 <div class="container m-4 d-flex flex-column mx-auto">
     <div class="card p-4">
-        <h1 id="registerH1" class="text-center">Register</h1>
+        <h1 id="registerH1" class="text-center bannerText">Register</h1>
         <form action="" method="post" class="form-group bg-light p-4 my-2 rounded">
             <div class="form-group">
                     <label for="username">Username</label>

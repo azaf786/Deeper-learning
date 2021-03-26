@@ -1,28 +1,10 @@
 <?php
 
-
-use App\Hydrator\EntityHydrator;
-
 require_once '../src/setup.php';
 
 
 try {
     $getProducts = $dbProvider->getProducts();
-//    $getProducts = $dbh->prepare('
-//        SELECT * from product
-//        ORDER BY RAND()
-//        LIMIT 12;
-//');
-//    $getProducts->execute();
-//    $allProducts = $getProducts->fetchAll(PDO::FETCH_ASSOC);
-//
-//    $hydrator = new EntityHydrator();
-//    $productsArray = [];
-//
-//    foreach ($allProducts as $row) {
-//        $products = $hydrator->hydrateProducts($row);
-//        $productsArray[] = $products;
-//    }
 }
 catch (PDOException $e) {
     echo $e->getMessage();
@@ -44,11 +26,11 @@ catch (PDOException $e) {
 
 <div class="carousel"
      data-flickity='{ "wrapAround": true }'>
-    <div class="carousel-cell"><img src="uploads/nike.png" alt="nike shoes"></div>
-    <div class="carousel-cell"><img src="uploads/nike.jpeg" alt="nike shoes"></div>
-    <div class="carousel-cell"><img src="uploads/jordan-delta-mid-shoe-bp21WR.jpeg" alt="nike shoes"></div>
-    <div class="carousel-cell"><img src="uploads/air-max-plus-eoi-shoe-7SQL5P.jpeg" alt="nike shoes"></div>
-    <div class="carousel-cell"><img src="uploads/air-max-plus-shoe-QZHGx0.jpeg" alt="nike shoes"></div>
+    <div class="carousel-cell"><img id="carouselImg" src="uploads/nike.png" alt="nike shoes"></div>
+    <div class="carousel-cell"><img id="carouselImg" src="uploads/nike.jpeg" alt="nike shoes"></div>
+    <div class="carousel-cell"><img id="carouselImg" src="uploads/jordan-delta-mid-shoe-bp21WR.jpeg" alt="nike shoes"></div>
+    <div class="carousel-cell"><img id="carouselImg" src="uploads/air-max-plus-eoi-shoe-7SQL5P.jpeg" alt="nike shoes"></div>
+    <div class="carousel-cell"><img id="carouselImg" src="uploads/air-max-plus-shoe-QZHGx0.jpeg" alt="nike shoes"></div>
 </div>
 
     <div id="threeCards" class="row">
@@ -80,7 +62,7 @@ catch (PDOException $e) {
             <div class="col-md-4 mt-4">
                 <div class="card profile-card-5">
                     <div class="card-img-block">
-                        <img id="prodImgs" class="card-img-top" src="uploads/jordan-delta-mid-shoe-bp21WR.jpeg" alt="Card image cap">
+                        <img id="prodImgs" class="card-img-top" src="<?= $prod->filePath ?>" alt="Product images">
                     </div>
                     <div class="card-body pt-0">
                         <h5 class="card-title"><?= $prod->title ?></h5>

@@ -8,6 +8,7 @@ use App\Entity\CheckIn;
 use App\Entity\Product;
 use App\Entity\Category;
 use App\Entity\Products;
+use App\Entity\User;
 
 class EntityHydrator
 {
@@ -28,8 +29,9 @@ class EntityHydrator
         $products = new Products();
         $products->id = $data['id'];
         $products->title = $data['title'];
-        $products->description = $data['description'] ?? null;
+        $products->description = $data['description'];
         $products->price = $data['price'];
+        $products->filePath = $data['filePath'];
 
         return $products;
     }
@@ -49,13 +51,13 @@ class EntityHydrator
 
     public function hydrateCategory(array $data): Category
     {
-            $category = new Category();
-            $category->catId = $data['catId'] ?? null;
-            $category->catTitle = $data['catTitle'];
-            $category->parent_id = $data['parent_id'] ?? null;
+        $category = new Category();
+        $category->catId = $data['catId'] ?? null;
+        $category->catTitle = $data['catTitle'];
+        $category->parent_id = $data['parent_id'] ?? null;
 //            $category->addCategory($category);
 //            var_dump($category);
-            return $category;
+        return $category;
 
     }
 
@@ -77,6 +79,17 @@ class EntityHydrator
         }
 
         return $product;
+    }
+
+    public function hydrateUser(array $data): User
+    {
+        $user = new User();
+        $user->id = $data['id'] ?? null;
+        $user->username = $data['username'];
+        $user->email = $data['email'];
+        $user->password = $data['password'];
+
+        return $user;
     }
 
 }

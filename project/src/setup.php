@@ -24,5 +24,10 @@ $logger->pushHandler(
     )
 );
 
-$dbProvider = new \App\DataProvider\DatabaseProvider2();
+$dbProvider = new \App\DataProvider\DatabaseProvider();
 
+session_start();
+
+if(isset($_SESSION['loginId'])){
+    $loggedInUser = $dbProvider->getUser($_SESSION['loginId']);
+}
