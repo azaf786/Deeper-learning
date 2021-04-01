@@ -63,7 +63,7 @@ $getProducts = $dbProvider->getProducts();
                                                     $trimmedDescription .= '...';
 
                                                     ?>
-                                                    <p class="card-text"><?php echo $trimmedDescription; } ?></p>
+                                                    <p id="cardTrimmedDescription" class="card-text"><?php echo $trimmedDescription; } ?></p>
                                                     <div class="text-center">
                                                         <a href="viewProduct.php?productId=<?=$prod->id?>" id="price-btn" class="btn btn-lg text-center">£ <?= $prod->price ?></a>
                                                     </div>
