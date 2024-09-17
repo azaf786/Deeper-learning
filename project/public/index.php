@@ -35,21 +35,21 @@ catch (PDOException $e) {
 
     <div id="threeCards" class="row">
         <div class="col-md-4">
-            <div id="card" class="card card-1">
-                <h3>Next Day Delivery</h3>
-                <p>With your aShoe membership, your products can arrive next day for free. Sign up today to claim free 1 year of next day deliveries. What are you waiting for? Sign up! </p>
+            <div  class="card card-1">
+                <h3 id="cardText">Next Day Delivery</h3>
+                <p id="cardDescriptionText">With your aShoe membership, your products can arrive next day for free. Sign up today to claim free 1 year of next day deliveries. What are you waiting for? Sign up! </p>
             </div>
         </div>
         <div class="col-md-4">
-            <div id="card" class="card card-2">
-                <h3>How are our products made?</h3>
-                <p>Our products are responsibly designed utilising recycled materials from post-consumer and/or post-manufactured waste.</p>
+            <div class="card card-2">
+                <h3 id="cardText">How are our products made?</h3>
+                <p id="cardDescriptionText">Our products are responsibly designed utilising recycled materials from post-consumer and/or post-manufactured waste.</p>
             </div>
         </div>
         <div class="col-md-4">
-            <div id="card" class="card card-3">
-                <h3>Like being Unique?</h3>
-                <p>Now you can make your shows your very own with a colour palette and premium materials including smooth and rippled leather and a new, matching sidewall selection.</p>
+            <div class="card card-3">
+                <h3 id="cardText">Like being Unique?</h3>
+                <p id="cardDescriptionText">Now you can make your shows your very own with a colour palette and premium materials including smooth and rippled leather and a new, matching sidewall selection.</p>
             </div>
         </div>
     </div>
@@ -77,7 +77,7 @@ catch (PDOException $e) {
                                 $trimmedDescription .= '...';
 
                         ?>
-                        <p class="card-text"><?php echo $trimmedDescription; } ?></p>
+                        <p id="cardTrimmedDescription" class="card-text"><?php echo $trimmedDescription; } ?></p>
                         <div class="text-center">
                             <a href="viewProduct.php?productId=<?=$prod->id?>" id="price-btn" class="btn btn-lg text-center">£ <?= $prod->price ?></a>
                         </div>
